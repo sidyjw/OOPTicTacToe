@@ -1,6 +1,6 @@
 namespace Domain;
 
-public class Player : Entity
+public abstract class Player : Entity
 {
     public string Name { get; init; }
     public PlayerType PlayerType { get; init; }
