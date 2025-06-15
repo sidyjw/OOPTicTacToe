@@ -1,5 +1,3 @@
-using System.Reflection.Metadata;
-
 namespace Domain;
 
 public class Grid : Entity
@@ -7,11 +5,11 @@ public class Grid : Entity
     public bool HasWinner { get; private set; } = false;
     public bool Drawn { get; private set; } = false;
     public Player? Winner => _winner;
-    public Position[,] Board => _board;
     private Player? _winner = null;
-    private Position[,] _board = new Position[3, 3];
+    public Marker[,] Board => _board;
+    private Marker[,] _board = new Marker[3, 3];
 
-    public void PlaceMarker(Position position)
+    public void PlaceMarker(Marker position)
     {
         if (HasWinner || Drawn)
             throw new InvalidOperationException("Cannot place a marker when the game is already finished.");
@@ -96,4 +94,4 @@ public class Grid : Entity
         return true;
     }
 }
-public record Position(int Row, int Column, Player Player);
+public record Marker(int Row, int Column, Player Player);
