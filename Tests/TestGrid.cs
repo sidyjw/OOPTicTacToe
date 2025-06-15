@@ -122,25 +122,27 @@ public class TestGrid
     }
 
     [Fact]
-    public void PlaceMarker_CannotPlaceMarkerWhenDrawn()
+    public void PlaceMarker_CannotPlaceMarkerWhenGameIsDrawn()
     {
         var grid = new Grid();
         var player1 = new PlayerX("Player1");
         var player2 = new PlayerO("Player2");
 
-        // Fill the grid without a winner
+        // Fill the board with no winner (draw)
         grid.PlaceMarker(new Marker(0, 0, player1));
         grid.PlaceMarker(new Marker(0, 1, player2));
         grid.PlaceMarker(new Marker(0, 2, player1));
-        grid.PlaceMarker(new Marker(1, 0, player2));
-        grid.PlaceMarker(new Marker(1, 1, player1));
+        grid.PlaceMarker(new Marker(1, 0, player1));
+        grid.PlaceMarker(new Marker(1, 1, player2));
         grid.PlaceMarker(new Marker(1, 2, player2));
-        grid.PlaceMarker(new Marker(2, 0, player1));
-        grid.PlaceMarker(new Marker(2, 1, player2));
+        grid.PlaceMarker(new Marker(2, 0, player2));
+        grid.PlaceMarker(new Marker(2, 1, player1));
         grid.PlaceMarker(new Marker(2, 2, player1));
 
         Assert.True(grid.Drawn);
+        Assert.False(grid.HasWinner);
 
+        // Try to place another marker after draw
         Assert.Throws<InvalidOperationException>(() =>
             grid.PlaceMarker(new Marker(0, 0, player1))
         );
