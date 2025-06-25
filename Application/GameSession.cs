@@ -26,7 +26,7 @@ public class GameSession
     {
         // Logic to retrieve the game aggregate by gameId
         // and make a move using the marker
-        var gameAggregate = _gameRepository.GetGameAggregateById(gameId);
+        var gameAggregate = _gameRepository.GetById(gameId);
 
         if (gameAggregate == null)
             throw new InvalidOperationException("Game not found.");
@@ -40,7 +40,7 @@ public class GameSession
 
 public interface IGameRepository
 {
-    public GameAggregate GetGameAggregateById(Guid gameId);
+    public GameAggregate GetById(Guid gameId);
     public GameAggregate Save(GameAggregate gameAggregate);
     public GameAggregate Update(GameAggregate gameAggregate);
 }

@@ -13,7 +13,7 @@ public class GameSessionTest : IDisposable
         _gameRepository = Substitute.For<IGameRepository>();
 
         _gameRepository
-            .GetGameAggregateById(Arg.Any<Guid>())
+            .GetById(Arg.Any<Guid>())
             .Returns((id) =>
                 _gameAggregates
                 .FirstOrDefault(g => g.Id == id.Arg<Guid>())
